@@ -150,3 +150,7 @@ date,symbol,open,high,low,close,volume,amount,turnover
 - 交易成本、滑点和冲击成本。
 - 分钟级入场确认。
 - 财报、公告和行业事件风控。
+
+## License
+
+This project is released under the MIT License. See `LICENSE` for details.
