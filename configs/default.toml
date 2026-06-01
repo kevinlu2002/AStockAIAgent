@@ -1,0 +1,28 @@
+[data]
+symbols = ["000001", "600519", "300750"]
+start_date = "20180101"
+end_date = "20260526"
+adjust = "qfq"
+raw_dir = "data/raw"
+allow_download = true
+
+[model]
+horizon_days = 10
+validation_fraction = 0.2
+min_rows_per_symbol = 180
+random_state = 42
+model_dir = "models"
+
+[risk]
+capital = 100000.0
+risk_per_trade_pct = 0.01
+max_position_pct = 0.20
+max_portfolio_positions = 5
+stop_loss_pct = 0.07
+atr_stop_multiple = 2.0
+min_expected_return = 0.025
+max_expected_drawdown = -0.10
+lot_size = 100
+
+[output]
+reports_dir = "reports"

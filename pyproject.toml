@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ashare-ai-agent"
+version = "0.1.0"
+description = "A-share market proxy model and research signal agent"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.24",
+  "pandas>=2.0",
+  "scikit-learn>=1.3",
+  "joblib>=1.3",
+  "flask>=3.1",
+  "waitress>=3.0"
+]
+
+[project.optional-dependencies]
+data = ["akshare>=1.16"]
+boosting = ["lightgbm>=4.0"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+ashare-agent = "ashare_ai_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

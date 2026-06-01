@@ -1,0 +1,22 @@
+services:
+  ashare-ai-agent:
+    build: .
+    container_name: ashare-ai-agent
+    restart: unless-stopped
+    ports:
+      - "7860:7860"
+    environment:
+      ASHARE_WEB_PASSWORD: "${ASHARE_WEB_PASSWORD:-change-me-now}"
+      ASHARE_SECRET_KEY: "${ASHARE_SECRET_KEY:-change-this-secret-key}"
+      ASHARE_PORT: "7860"
+      ASHARE_AUTO_NEWS: "${ASHARE_AUTO_NEWS:-1}"
+      ASHARE_NEWS_INTERVAL_SECONDS: "${ASHARE_NEWS_INTERVAL_SECONDS:-900}"
+      ASHARE_AUTO_KNOWLEDGE: "${ASHARE_AUTO_KNOWLEDGE:-1}"
+      ASHARE_KNOWLEDGE_INTERVAL_SECONDS: "${ASHARE_KNOWLEDGE_INTERVAL_SECONDS:-86400}"
+      ASHARE_AUTO_RETRAIN: "${ASHARE_AUTO_RETRAIN:-1}"
+      ASHARE_RETRAIN_TIME: "${ASHARE_RETRAIN_TIME:-16:30}"
+      ASHARE_FETCH_WORKERS: "${ASHARE_FETCH_WORKERS:-8}"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports

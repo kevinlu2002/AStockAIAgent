@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A 股 AI 推荐</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>A 股 AI 推荐</h1>
+          <p id="statusLine">加载模型状态...</p>
+        </div>
+        <div class="clock-block">
+          <span>市场时间</span>
+          <strong id="liveClock">--:--:--</strong>
+        </div>
+      </header>
+
+      <section class="controls-band">
+        <label>
+          <span>本金</span>
+          <input id="capitalInput" type="number" min="1000" step="1000" value="100000" />
+        </label>
+        <label>
+          <span>持仓天数</span>
+          <input id="holdingInput" type="number" min="1" step="1" placeholder="可选" />
+        </label>
+        <label>
+          <span>分析范围</span>
+          <select id="universeInput">
+            <option value="cached">已缓存股票</option>
+            <option value="sample300">全市场 300 只</option>
+            <option value="sample1000">全市场 1000 只</option>
+            <option value="all" selected>全部 A 股</option>
+          </select>
+        </label>
+        <label>
+          <span>指定股票</span>
+          <input id="symbolInput" type="text" inputmode="numeric" maxlength="12" placeholder="如 000001" />
+        </label>
+        <label>
+          <span>实时时间</span>
+          <input id="timeInput" type="text" readonly />
+        </label>
+        <button id="recommendBtn" type="button">开始分析</button>
+        <button id="singleStockBtn" type="button">分析代码</button>
+        <button id="cancelAnalysisBtn" type="button" disabled>停止分析</button>
+      </section>
+
+      <section class="progress-band" id="progressBand">
+        <div class="progress-top">
+          <span id="progressStage">等待分析</span>
+          <strong id="progressPct">0%</strong>
+        </div>
+        <div class="progress-track">
+          <div id="progressFill"></div>
+        </div>
+        <p id="progressMessage">输入本金和持仓天数后开始分析。</p>
+      </section>
+
+      <section class="news-band">
+        <div class="news-head">
+          <div>
+            <h2>国际新闻影响</h2>
+            <span id="newsGenerated">等待抓取</span>
+          </div>
+          <div class="button-row">
+            <button id="newsBtn" type="button">新闻综合推荐</button>
+            <button id="retrainBtn" type="button">手动重训</button>
+            <button id="evaluationBtn" type="button">回测预测</button>
+          </div>
+        </div>
+        <div id="automationStatus" class="automation-status">自动任务状态读取中...</div>
+        <div id="evaluationStatus" class="automation-status">预测回测状态读取中...</div>
+        <div id="newsList" class="news-list"></div>
+      </section>
+
+      <section class="workspace">
+        <div class="recommendation-pane">
+          <div class="pane-head">
+            <h2>推荐股票</h2>
+            <span id="generatedAt">等待生成</span>
+          </div>
+          <div id="recommendationGroups" class="groups"></div>
+        </div>
+
+        <aside class="detail-pane">
+          <div class="detail-head">
+            <div>
+              <h2 id="selectedTitle">未选择股票</h2>
+              <span id="quoteSource">--</span>
+            </div>
+            <button id="refreshQuoteBtn" type="button" disabled>刷新</button>
+          </div>
+
+          <div class="quote-grid">
+            <div>
+              <span>实时价</span>
+              <strong id="quotePrice">--</strong>
+            </div>
+            <div>
+              <span>涨跌幅</span>
+              <strong id="quotePct">--</strong>
+            </div>
+            <div>
+              <span>最高</span>
+              <strong id="quoteHigh">--</strong>
+            </div>
+            <div>
+              <span>最低</span>
+              <strong id="quoteLow">--</strong>
+            </div>
+            <div>
+              <span>今开</span>
+              <strong id="quoteOpen">--</strong>
+            </div>
+            <div>
+              <span>换手</span>
+              <strong id="quoteTurnover">--</strong>
+            </div>
+            <div>
+              <span>成交额</span>
+              <strong id="quoteAmount">--</strong>
+            </div>
+            <div>
+              <span>总市值</span>
+              <strong id="quoteMarketCap">--</strong>
+            </div>
+          </div>
+
+          <div class="kline-tabs">
+            <button type="button" data-mode="intraday">分时</button>
+            <button type="button" data-mode="five">五日</button>
+            <button type="button" data-mode="daily" class="active">日K</button>
+            <button type="button" data-mode="weekly">周K</button>
+            <button type="button" data-mode="monthly">月K</button>
+            <button type="button" data-mode="more">更多</button>
+          </div>
+          <div class="kline-tools">
+            <span class="tool-chip">均线</span>
+            <strong id="klineLegend">MA5 --  MA10 --  MA20 --</strong>
+            <span class="tool-chip">DK点</span>
+            <span class="tool-chip">前复权</span>
+          </div>
+
+          <div class="chart-wrap">
+            <canvas id="klineCanvas" width="920" height="520"></canvas>
+          </div>
+          <div id="selectedMeta" class="selected-meta"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="/assets/app.js"></script>
+  </body>
+</html>
