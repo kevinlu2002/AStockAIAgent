@@ -1,5 +1,7 @@
 # AStockAIAgent
 
+AStockAIAgent is a research-oriented A-share market agent. It builds OHLCV features, trains proxy models for return and drawdown forecasting, turns model outputs into risk-aware candidate signals, and provides a local Flask dashboard for review. The project is intended for research, screening, and post-trade analysis, not automated investment advice.
+
 这是一个面向 A 股历史行情的研究型 AI 代理项目。它会先用历史 OHLCV 数据训练代理模型，预测未来若干交易日的收益和回撤风险，再把模型输出转成可执行性更强的研究信号：候选股票、计划买入时间、计划买入数量、参考入场价、止损价和风控理由。
 
 重要说明：本项目输出不是投资承诺，也不是确定性收益建议。A 股存在流动性、停牌、涨跌停、滑点、财报和政策冲击等风险，任何实盘交易前都应人工复核。
